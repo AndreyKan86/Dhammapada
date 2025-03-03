@@ -14,16 +14,16 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 
 @Composable
-fun MainScreen(){
+fun MainScreen(text: String, imageName: String?){
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.Gray)
     ) {
-        val (image, text) = createRefs()
+        val (imageBox, textBox) = createRefs()
 
         Box(modifier = Modifier
-            .constrainAs(image){
+            .constrainAs(imageBox){
             top.linkTo(parent.top, margin = 50.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
@@ -33,18 +33,21 @@ fun MainScreen(){
             contentAlignment = Alignment.Center
         )
         {
-            ImageBox()
+            ImageBox(imageName)
+            //var textToDisplay = imageName ?: "Данные отсутствуют"
+            //Text(text = textToDisplay)
         }
 
-        Box(modifier = Modifier.constrainAs(text){
-            top.linkTo(image.bottom)
+        Box(modifier = Modifier.constrainAs(textBox){
+            top.linkTo(imageBox.bottom, margin = 80.dp)
             start.linkTo(parent.start)
         }
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .background(Color.Cyan),
             contentAlignment = Alignment.Center
         )
         {
-            Text("Текст")
+            Text(text)
         }
     }
 }
