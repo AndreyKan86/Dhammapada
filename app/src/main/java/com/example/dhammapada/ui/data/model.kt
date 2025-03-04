@@ -14,15 +14,10 @@ data class DhammapadaRecord(
     val width: Int?,
     val height: Int?,
     val text: String,
-    val text_entities: List<TextEntity>
 ) {
     companion object {
         fun fromJson(jsonObject: JSONObject): DhammapadaRecord {
-            val textEntities = mutableListOf<TextEntity>()
-            val textEntitiesJsonArray = jsonObject.getJSONArray("text_entities")
-            for (i in 0 until textEntitiesJsonArray.length()) {
-                textEntities.add(TextEntity.fromJson(textEntitiesJsonArray.getJSONObject(i)))
-            }
+
             return DhammapadaRecord(
                 jsonObject.getInt("id"),
                 jsonObject.getString("type"),
@@ -35,23 +30,6 @@ data class DhammapadaRecord(
                 jsonObject.optInt("width"),
                 jsonObject.optInt("height"),
                 jsonObject.getString("text"),
-                textEntities
-            )
-        }
-    }
-}
-
-data class TextEntity(
-    val type: String,
-    val text: String,
-    val photo: String?
-) {
-    companion object {
-        fun fromJson(jsonObject: JSONObject): TextEntity {
-            return TextEntity(
-                jsonObject.getString("type"),
-                jsonObject.getString("text"),
-                jsonObject.optString("photo")
             )
         }
     }

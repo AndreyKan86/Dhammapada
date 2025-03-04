@@ -51,6 +51,8 @@ fun MainScaffold(dhammapadaViewModel: DhammapadaViewModel = viewModel()) {
     var text by remember { mutableStateOf("") }
     var imageName by remember { mutableStateOf<String?>(null) }
     val records by dhammapadaViewModel._records.collectAsState()
+    val currentRecordId by dhammapadaViewModel.currentRecordId.collectAsState()
+    val maxRecordId = dhammapadaViewModel.maxRecordId
 
     LaunchedEffect(Unit) {
         dhammapadaViewModel.loadData(context)
@@ -84,8 +86,8 @@ fun MainScaffold(dhammapadaViewModel: DhammapadaViewModel = viewModel()) {
                     ) {
                         Button(onClick = {
                             try {
-                                text = dhammapadaViewModel.getTextById(3) ?: "Not found"
-                                imageName = dhammapadaViewModel.getImageById(3)
+                                text = dhammapadaViewModel.getTextById(currentRecordId) ?: "Not found"
+                                imageName = dhammapadaViewModel.getImageById(currentRecordId)
                             } catch (e: Exception) {
                                 text = "Error"
                                 imageName = "Error"
@@ -93,6 +95,12 @@ fun MainScaffold(dhammapadaViewModel: DhammapadaViewModel = viewModel()) {
                         }) {
                             Text("Старт")
                         }
+
+                        RecordSelector(
+                            currentId = currentRecordId,
+                            onIdChange = { dhammapadaViewModel.changeRecordId(it) },
+                            maxId = maxRecordId
+                        )
                     }
                 }
             ) { innerPadding ->

@@ -16,6 +16,15 @@ class DhammapadaViewModel : ViewModel() {
     private var records = MutableStateFlow<List<DhammapadaRecord>>(emptyList())
     var _records: StateFlow<List<DhammapadaRecord>> = records.asStateFlow()
 
+    private val _currentRecordId = MutableStateFlow(1)
+    val currentRecordId: StateFlow<Int> = _currentRecordId
+
+    val maxRecordId: Int = 422
+
+    fun changeRecordId(newId: Int) {
+        _currentRecordId.value = newId
+    }
+
     fun loadData(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             val jsonString = context.assets.open("dhammapada.json").bufferedReader().use { it.readText() }
