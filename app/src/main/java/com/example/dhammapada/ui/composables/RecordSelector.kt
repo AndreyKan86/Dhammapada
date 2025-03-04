@@ -9,7 +9,9 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,7 +20,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -46,7 +50,13 @@ fun RecordSelector(
                     textFieldValue = TextFieldValue(newId.toString(), TextRange(newId.toString().length))
                 }
             },
-            enabled = currentId > 1
+            enabled = currentId > 1,
+            colors = IconButtonDefaults.iconButtonColors(
+                containerColor = Color.Blue,
+                contentColor = Color.White,
+                disabledContainerColor = Color.Gray,
+                disabledContentColor = Color.LightGray
+            )
         ) {
             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous")
         }
@@ -70,13 +80,19 @@ fun RecordSelector(
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier
-                .width(80.dp)
+                .width(100.dp)
                 .onFocusEvent { focusState ->
                     if (focusState.isFocused) {
-                        textFieldValue = textFieldValue.copy(selection = TextRange(textFieldValue.text.length))
+                        textFieldValue =
+                            textFieldValue.copy(selection = TextRange(textFieldValue.text.length))
                     }
                 },
-            singleLine = true
+            singleLine = true,
+            textStyle = TextStyle(color = Color.Red),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White
+            )
         )
 
         IconButton(
@@ -87,7 +103,13 @@ fun RecordSelector(
                     textFieldValue = TextFieldValue(newId.toString(), TextRange(newId.toString().length))
                 }
             },
-            enabled = currentId < maxId
+            enabled = currentId < maxId,
+            colors = IconButtonDefaults.iconButtonColors(
+                containerColor = Color.Blue,
+                contentColor = Color.White,
+                disabledContainerColor = Color.Gray,
+                disabledContentColor = Color.LightGray 
+            )
         ) {
             Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Next")
         }

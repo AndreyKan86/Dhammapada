@@ -84,6 +84,13 @@ fun MainScaffold(dhammapadaViewModel: DhammapadaViewModel = viewModel()) {
                     BottomAppBar(
                         containerColor = Color.Yellow,
                     ) {
+
+                        RecordSelector(
+                            currentId = currentRecordId,
+                            onIdChange = { dhammapadaViewModel.changeRecordId(it) },
+                            maxId = maxRecordId
+                        )
+
                         Button(onClick = {
                             try {
                                 text = dhammapadaViewModel.getTextById(currentRecordId) ?: "Not found"
@@ -95,12 +102,6 @@ fun MainScaffold(dhammapadaViewModel: DhammapadaViewModel = viewModel()) {
                         }) {
                             Text("Старт")
                         }
-
-                        RecordSelector(
-                            currentId = currentRecordId,
-                            onIdChange = { dhammapadaViewModel.changeRecordId(it) },
-                            maxId = maxRecordId
-                        )
                     }
                 }
             ) { innerPadding ->

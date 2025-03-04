@@ -34,8 +34,6 @@ fun MainScreen(text: String, imageName: String?){
         )
         {
             ImageBox(imageName)
-            //var textToDisplay = imageName ?: "Данные отсутствуют"
-            //Text(text = textToDisplay)
         }
 
         Box(modifier = Modifier.constrainAs(textBox){
