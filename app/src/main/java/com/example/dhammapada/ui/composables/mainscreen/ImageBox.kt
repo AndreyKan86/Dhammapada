@@ -1,4 +1,4 @@
-package com.example.dhammapada.ui.composables
+package com.example.dhammapada.ui.composables.mainscreen
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

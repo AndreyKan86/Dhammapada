@@ -10,19 +10,29 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import kotlin.random.Random
 
 class DhammapadaViewModel : ViewModel() {
 
-    private var records = MutableStateFlow<List<DhammapadaRecord>>(emptyList())
-    var _records: StateFlow<List<DhammapadaRecord>> = records.asStateFlow()
+    private var _records = MutableStateFlow<List<DhammapadaRecord>>(emptyList())
+    //var records: StateFlow<List<DhammapadaRecord>> = _records.asStateFlow()
 
     private val _currentRecordId = MutableStateFlow(1)
     val currentRecordId: StateFlow<Int> = _currentRecordId
 
+    private val _currentText = MutableStateFlow<String?>(null)
+    val currentText: StateFlow<String?> = _currentText.asStateFlow()
+
+    private val _currentImageName = MutableStateFlow<String?>(null)
+    val currentImageName: StateFlow<String?> = _currentImageName.asStateFlow()
+
     val maxRecordId: Int = 422
+
 
     fun changeRecordId(newId: Int) {
         _currentRecordId.value = newId
+        _currentText.value = _records.value.find { it.id == newId }?.text
+        _currentImageName.value = _records.value.find { it.id == newId }?.photo
     }
 
     fun loadData(context: Context) {
@@ -37,15 +47,14 @@ class DhammapadaViewModel : ViewModel() {
                     recordsList.add(DhammapadaRecord.fromJson(messageObject))
                 }
             }
-            records.value = recordsList
+            _records.value = recordsList
         }
     }
 
-    fun getTextById(id: Int): String? {
-        return records.value.find { it.id == id }?.text
-    }
-
-    fun getImageById(id: Int): String? {
-        return records.value.find { it.id == id }?.photo
+    fun adviceFun(){
+        val newId = Random.Default.nextInt(1, 423)
+        _currentRecordId.value = newId
+        _currentText.value = _records.value.find { it.id == newId }?.text
+        _currentImageName.value = _records.value.find { it.id == newId }?.photo
     }
 }

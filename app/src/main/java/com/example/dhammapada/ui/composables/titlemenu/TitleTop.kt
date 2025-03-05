@@ -1,4 +1,4 @@
-package com.example.dhammapada.ui.composables
+package com.example.dhammapada.ui.composables.titlemenu
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

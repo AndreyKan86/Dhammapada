@@ -1,20 +1,13 @@
 package com.example.dhammapada.ui.composables
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
@@ -30,14 +23,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.semantics.text
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.dhammapada.ui.theme.MENU_DESCRIPTION
+import com.example.dhammapada.ui.composables.bottommenu.BottomMenu
+import com.example.dhammapada.ui.composables.drawermenu.DrawerContent
+import com.example.dhammapada.ui.composables.drawermenu.DrawerMenuBottom
+import com.example.dhammapada.ui.composables.mainscreen.MainScreen
+import com.example.dhammapada.ui.composables.titlemenu.TitleTop
 import com.example.dhammapada.ui.viewmodel.DhammapadaViewModel
 import kotlinx.coroutines.launch
 
@@ -48,9 +43,6 @@ fun MainScaffold(dhammapadaViewModel: DhammapadaViewModel = viewModel()) {
     val scope = rememberCoroutineScope()
 
     val context = LocalContext.current
-    var text by remember { mutableStateOf("") }
-    var imageName by remember { mutableStateOf<String?>(null) }
-    val records by dhammapadaViewModel._records.collectAsState()
     val currentRecordId by dhammapadaViewModel.currentRecordId.collectAsState()
     val maxRecordId = dhammapadaViewModel.maxRecordId
 
@@ -84,24 +76,7 @@ fun MainScaffold(dhammapadaViewModel: DhammapadaViewModel = viewModel()) {
                     BottomAppBar(
                         containerColor = Color.Yellow,
                     ) {
-
-                        RecordSelector(
-                            currentId = currentRecordId,
-                            onIdChange = { dhammapadaViewModel.changeRecordId(it) },
-                            maxId = maxRecordId
-                        )
-
-                        Button(onClick = {
-                            try {
-                                text = dhammapadaViewModel.getTextById(currentRecordId) ?: "Not found"
-                                imageName = dhammapadaViewModel.getImageById(currentRecordId)
-                            } catch (e: Exception) {
-                                text = "Error"
-                                imageName = "Error"
-                            }
-                        }) {
-                            Text("Старт")
-                        }
+                        BottomMenu()
                     }
                 }
             ) { innerPadding ->
@@ -113,7 +88,7 @@ fun MainScaffold(dhammapadaViewModel: DhammapadaViewModel = viewModel()) {
                         .padding(16.dp)
 
                 ) {
-                    MainScreen(text, imageName)
+                    MainScreen()
                 }
             }
         }

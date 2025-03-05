@@ -1,4 +1,4 @@
-package com.example.dhammapada.ui.composables
+package com.example.dhammapada.ui.composables.drawermenu
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
