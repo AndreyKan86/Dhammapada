@@ -28,11 +28,26 @@ class DhammapadaViewModel : ViewModel() {
 
     val maxRecordId: Int = 422
 
-
     fun changeRecordId(newId: Int) {
         _currentRecordId.value = newId
-        _currentText.value = _records.value.find { it.id == newId }?.text
-        _currentImageName.value = _records.value.find { it.id == newId }?.photo
+        _currentText.value = _records.value.find { extractNumber(it.text) == newId }?.text
+        _currentImageName.value = _records.value.find { extractNumber(it.text) == newId }?.photo
+    }
+
+    fun adviceFun(){
+        val newId = Random.Default.nextInt(1, 423)
+        _currentRecordId.value = newId
+        _currentText.value = _records.value.find { extractNumber(it.text) == newId }?.text
+        _currentImageName.value = _records.value.find { extractNumber(it.text) == newId }?.photo
+    }
+
+    private fun extractNumber(record: String): Int {
+        val digitsOnly = record.filter { it.isDigit() }
+        return if (digitsOnly.isNotEmpty()) {
+            digitsOnly.toInt()
+        } else {
+            0
+        }
     }
 
     fun loadData(context: Context) {
@@ -51,10 +66,4 @@ class DhammapadaViewModel : ViewModel() {
         }
     }
 
-    fun adviceFun(){
-        val newId = Random.Default.nextInt(1, 423)
-        _currentRecordId.value = newId
-        _currentText.value = _records.value.find { it.id == newId }?.text
-        _currentImageName.value = _records.value.find { it.id == newId }?.photo
-    }
 }
