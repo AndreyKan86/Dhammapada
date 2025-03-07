@@ -25,6 +25,7 @@ import com.example.dhammapada.ui.theme.COMPANY_NAME
 import com.example.dhammapada.ui.theme.CompanyNameTextStyle
 import com.example.dhammapada.ui.theme.DESCRIPTION_APP
 import com.example.dhammapada.ui.theme.LINK
+import com.example.dhammapada.ui.theme.LINK_FOR_SOURSE
 import com.example.dhammapada.ui.theme.LOGO_DESCRIPTION
 import com.example.dhammapada.ui.theme.TextStyle
 
@@ -116,11 +117,15 @@ fun DrawerContent(onItemClick: () -> Unit)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .padding(6.dp)
+                .padding(16.dp)
             )
             {
-                Text(text = DESCRIPTION_APP,
-                    style = TextStyle)
+                TextLink(
+                    fullText = "$DESCRIPTION_APP $LINK_FOR_SOURSE",
+                    linkText = LINK_FOR_SOURSE,
+                    link = "https://t.me/buddha_dhammapada",
+                    TextStyle
+                )
             }
         }
     }

@@ -1,15 +1,23 @@
 package com.example.dhammapada.ui.composables.mainscreen
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
@@ -17,8 +25,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.dhammapada.ui.theme.PLACEHOLDER
-import com.example.dhammapada.ui.theme.START
+import com.example.dhammapada.ui.theme.PLACEHOLDER_IMAGE
+import com.example.dhammapada.ui.theme.PLACEHOLDER_TEXT
 import com.example.dhammapada.ui.theme.TextStyle
 import com.example.dhammapada.ui.viewmodel.DhammapadaViewModel
 
@@ -46,18 +54,22 @@ fun MainScreen(viewModel: DhammapadaViewModel = viewModel()){
         Box(
             modifier = Modifier
                 .layoutId("imageBox")
-                .size(400.dp),
+                .size(400.dp)
+                .clip(RoundedCornerShape(16.dp)),
             contentAlignment = Alignment.Center
         ) {
-            ImageBox(imageName ?: PLACEHOLDER)
+            ImageBox(imageName ?: PLACEHOLDER_IMAGE)
         }
 
         Box(
             modifier = Modifier
-                .layoutId("textBox"),
+                .layoutId("textBox")
+                .width(400.dp)
+                .border(2.dp, Color(0xFF2C3930), RoundedCornerShape(16.dp))
+                .padding(8.dp),
             contentAlignment = Alignment.Center
         ) {
-            Text(text ?: PLACEHOLDER,
+            Text(text ?: PLACEHOLDER_TEXT,
                 style = TextStyle)
         }
     }
@@ -78,7 +90,6 @@ private fun portraitConstraints(): ConstraintSet {
             top.linkTo(imageBox.bottom, margin = 80.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
-            width = Dimension.fillToConstraints
         }
     }
 }
