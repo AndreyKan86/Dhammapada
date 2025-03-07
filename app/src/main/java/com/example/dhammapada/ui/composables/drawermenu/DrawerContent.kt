@@ -13,8 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -22,22 +20,23 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dhammapada.R
 import com.example.dhammapada.ui.theme.COMPANY_NAME
 import com.example.dhammapada.ui.theme.CompanyNameTextStyle
 import com.example.dhammapada.ui.theme.DESCRIPTION_APP
+import com.example.dhammapada.ui.theme.LINK
 import com.example.dhammapada.ui.theme.LOGO_DESCRIPTION
-import com.example.dhammapada.ui.viewmodel.DhammapadaViewModel
+import com.example.dhammapada.ui.theme.TextStyle
 
 //Содержимое выплывающего меню
 @Composable
 fun DrawerContent(onItemClick: () -> Unit)
 {
     val uriHandler = LocalUriHandler.current
-    val viewModel: DhammapadaViewModel = viewModel()
 
-    ModalDrawerSheet()
+    ModalDrawerSheet(
+        drawerContainerColor = MaterialTheme.colorScheme.surface,
+    )
     {
         ConstraintLayout()
         {
@@ -65,7 +64,7 @@ fun DrawerContent(onItemClick: () -> Unit)
                         .size(80.dp)
                         .border(2.dp, MaterialTheme.colorScheme.primary, CircleShape)
                         .clip(CircleShape)
-                        .clickable { uriHandler.openUri("https://t.me/tumultuari") }
+                        .clickable { uriHandler.openUri(LINK) }
                 )
             }
 
@@ -79,7 +78,8 @@ fun DrawerContent(onItemClick: () -> Unit)
             {
                 Text(
                     text = COMPANY_NAME,
-                    style = CompanyNameTextStyle
+                    style = CompanyNameTextStyle,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
@@ -119,7 +119,8 @@ fun DrawerContent(onItemClick: () -> Unit)
                 .padding(6.dp)
             )
             {
-                Text(text = DESCRIPTION_APP)
+                Text(text = DESCRIPTION_APP,
+                    style = TextStyle)
             }
         }
     }

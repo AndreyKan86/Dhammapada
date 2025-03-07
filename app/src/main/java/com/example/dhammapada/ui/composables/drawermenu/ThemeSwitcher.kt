@@ -31,7 +31,7 @@ fun ThemeSwitcher(
             onCheckedChange = { ThemeManager.toggleTheme() },
             colors = SwitchDefaults.colors(
                 checkedThumbColor = MaterialTheme.colorScheme.primary,
-                checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
+                checkedTrackColor = Color.White,
                 uncheckedThumbColor = Color.White,
                 uncheckedTrackColor = Color.LightGray,
             )

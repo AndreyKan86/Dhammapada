@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -36,7 +37,10 @@ fun BottomMenu(viewModel: DhammapadaViewModel = viewModel()) {
     ) {
 
         Button(
-            onClick = { viewModel.adviceFun() }
+            onClick = { viewModel.adviceFun() },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF443627)
+            )
         )
         {
         Text("Получить совет")
@@ -51,11 +55,12 @@ fun BottomMenu(viewModel: DhammapadaViewModel = viewModel()) {
             },
             enabled = currentId > 1,
             colors = IconButtonDefaults.iconButtonColors(
-                containerColor = Color.Blue,
+                containerColor = Color(0xFF443627),
                 contentColor = Color.White,
                 disabledContainerColor = Color.Gray,
                 disabledContentColor = Color.LightGray
             )
+
         ) {
             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous")
         }
@@ -71,11 +76,12 @@ fun BottomMenu(viewModel: DhammapadaViewModel = viewModel()) {
             },
             enabled = currentId < viewModel.maxRecordId,
             colors = IconButtonDefaults.iconButtonColors(
-                containerColor = Color.Blue,
+                containerColor = Color(0xFF443627),
                 contentColor = Color.White,
                 disabledContainerColor = Color.Gray,
                 disabledContentColor = Color.LightGray
             )
+
         ) {
             Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Next")
         }

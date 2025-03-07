@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dhammapada.ui.data.DhammapadaRecord
+import com.example.dhammapada.ui.theme.START
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,10 +21,10 @@ class DhammapadaViewModel : ViewModel() {
     private val _currentRecordId = MutableStateFlow(1)
     val currentRecordId: StateFlow<Int> = _currentRecordId
 
-    private val _currentText = MutableStateFlow<String?>(null)
+    private val _currentText = MutableStateFlow<String?>(START)
     val currentText: StateFlow<String?> = _currentText.asStateFlow()
 
-    private val _currentImageName = MutableStateFlow<String?>(null)
+    private val _currentImageName = MutableStateFlow<String?>("photos/photo_1@09-10-2019_10-26-14.jpg")
     val currentImageName: StateFlow<String?> = _currentImageName.asStateFlow()
 
     val maxRecordId: Int = 422

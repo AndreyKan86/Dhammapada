@@ -1,10 +1,8 @@
 package com.example.dhammapada.ui.composables.mainscreen
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,7 +10,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
@@ -20,7 +17,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.dhammapada.ui.theme.PLACEHOLDER
 import com.example.dhammapada.ui.theme.START
+import com.example.dhammapada.ui.theme.TextStyle
 import com.example.dhammapada.ui.viewmodel.DhammapadaViewModel
 
 @Composable
@@ -42,26 +41,24 @@ fun MainScreen(viewModel: DhammapadaViewModel = viewModel()){
         constraintSet = constraints,
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Gray)
     ) {
 
         Box(
             modifier = Modifier
                 .layoutId("imageBox")
-                .size(400.dp)
-                .background(Color.Blue),
+                .size(400.dp),
             contentAlignment = Alignment.Center
         ) {
-            ImageBox(imageName ?: "photos/start.jpg")
+            ImageBox(imageName ?: PLACEHOLDER)
         }
 
         Box(
             modifier = Modifier
-                .layoutId("textBox")
-                .background(Color.Cyan),
+                .layoutId("textBox"),
             contentAlignment = Alignment.Center
         ) {
-            Text(text ?: START)
+            Text(text ?: PLACEHOLDER,
+                style = TextStyle)
         }
     }
 }

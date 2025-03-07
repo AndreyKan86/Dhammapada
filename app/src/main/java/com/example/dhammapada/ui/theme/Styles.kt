@@ -19,3 +19,9 @@ val TitleTextStyle = TextStyle(
     textDecoration = TextDecoration.Underline,
     fontFamily = Oranienbaum,
 )
+
+val TextStyle = TextStyle(
+    fontSize = 22.sp,
+    //textDecoration = TextDecoration.Underline,
+    fontFamily = Oranienbaum,
+)
