@@ -24,7 +24,7 @@ class DhammapadaViewModel : ViewModel() {
     private val _currentText = MutableStateFlow<String?>(START)
     val currentText: StateFlow<String?> = _currentText.asStateFlow()
 
-    private val _currentImageName = MutableStateFlow<String?>("photos/photo_1@09-10-2019_10-26-14.jpg")
+    private val _currentImageName = MutableStateFlow<String?>("photos/photo_414@18-11-2022_16-01-47.jpg")
     val currentImageName: StateFlow<String?> = _currentImageName.asStateFlow()
 
     val maxRecordId: Int = 422
